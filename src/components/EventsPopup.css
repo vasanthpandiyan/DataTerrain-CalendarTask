@@ -1,0 +1,59 @@
+.event-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it overlays above other content */
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.event-popup-content {
+  background: #ffffff; /* White background for the modal */
+  color: #202124; /* Dark text color for readability */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+  max-width: 500px; /* Set a max width for the modal */
+  width: 90%; /* Responsive width */
+  position: relative;
+  transition: transform 0.3s ease; /* Transition for pop-up effect */
+}
+
+.event-popup-content h2 {
+  margin-top: 0;
+}
+
+.event-popup-content p {
+  margin: 10px 0; /* Add some margin to paragraphs for spacing */
+}
+
+/* Close Button Styles */
+button {
+  background-color: #2196F3; /* Primary color for the button */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.2s ease; /* Transition for button hover */
+}
+
+button:hover {
+  background-color: #1976D2; /* Darker shade on hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .event-popup-content {
+    padding: 15px; /* Adjust padding on smaller screens */
+  }
+
+  button {
+    width: 100%; /* Full-width button on small screens */
+  }
+}
