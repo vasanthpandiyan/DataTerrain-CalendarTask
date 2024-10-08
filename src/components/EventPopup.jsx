@@ -8,11 +8,14 @@ const EventsPopup = ({ event, onClose }) => {
   const { candidate, handled_by } = user_det;
 
   return (
-    <div className="event-popup-overlay">
+    <div className="event-popup-overlay" onClick={onClose}>
       {" "}
       {/* Backdrop */}
       <div className="event-popup-content">
-        {" "}
+        <div className="event-popup-content-title">
+          <span>Meeting</span>
+          <button onClick={onClose}>X</button>
+        </div>{" "}
         {/* Modal Content */}
         <h2>{summary}</h2>
         <p>
@@ -37,32 +40,35 @@ const EventsPopup = ({ event, onClose }) => {
         <h3>Candidate Details</h3>
         <p>
           <strong>Name:</strong>{" "}
-          {`${candidate.candidate_firstName} ${candidate.candidate_lastName}`}
+          ${candidate.candidate_firstName} ${candidate.candidate_lastName}
         </p>
         <p>
           <strong>Email:</strong> {candidate.candidate_email}
         </p>
-        {/* Job Details */}
-        <h3>Job Details</h3>
-        <p>
-          <strong>Title:</strong> {job_id.jobRequest_Title}
-        </p>
-        <p>
-          <strong>Role:</strong> {job_id.jobRequest_Role}
-        </p>
-        <p>
-          <strong>Key Skills:</strong> {job_id.jobRequest_KeySkills}
-        </p>
-        {/* HR Handling the Event */}
-        <h3>Handled By</h3>
-        <p>
-          <strong>HR Name:</strong>{" "}
-          {`${handled_by.firstName} ${handled_by.lastName}`}
-        </p>
-        <p>
-          <strong>Email:</strong> {handled_by.userEmail}
-        </p>
-        <button onClick={onClose}>Close</button>
+        
+        {event?.children &&
+          event?.children.length > 0 &&
+          event?.children.map((childEvent) => {
+            return (
+              <div>
+                <p>
+                  <strong>Event Name:</strong> {childEvent?.title}
+                </p>
+                <p>
+                  <strong>Start Time:</strong>{" "}
+                  {new Date(childEvent?.start).toLocaleString()}
+                </p>
+                <p>
+                  <strong>End Time:</strong>{" "}
+                  {new Date(childEvent?.end).toLocaleString()}
+                </p>
+                <p>
+                  <strong>Score:</strong>{" "}
+                  {Object.values(childEvent?.score).join(", ")}
+                </p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
