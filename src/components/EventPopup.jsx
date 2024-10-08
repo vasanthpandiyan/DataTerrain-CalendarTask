@@ -13,7 +13,7 @@ const EventsPopup = ({ event, onClose }) => {
       {/* Backdrop */}
       <div className="event-popup-content">
         <div className="event-popup-content-title">
-          <span>Meeting</span>
+          <span>Meetings</span>
           <button onClick={onClose}>X</button>
         </div>{" "}
         {/* Modal Content */}
@@ -40,12 +40,11 @@ const EventsPopup = ({ event, onClose }) => {
         <h3>Candidate Details</h3>
         <p>
           <strong>Name:</strong>{" "}
-          ${candidate.candidate_firstName} ${candidate.candidate_lastName}
+          {`${candidate.candidate_firstName} ${candidate.candidate_lastName}`}
         </p>
         <p>
           <strong>Email:</strong> {candidate.candidate_email}
         </p>
-        
         {event?.children &&
           event?.children.length > 0 &&
           event?.children.map((childEvent) => {

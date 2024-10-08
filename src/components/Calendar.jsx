@@ -4,13 +4,14 @@ import moment from "moment";
 import EventsPopup from "./EventPopup"; // Update if necessary
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css"; // Import your CSS file
+import EventThumbnail from "./EventThumbnail";
 
 // Initialize localizer
 const localizer = momentLocalizer(moment);
 
 const Calendar = ({ eventsData }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
-
+  const [view, setView] = useState("month");
   // Mapping the JSON event data to the format required by the calendar
   const events = eventsData?.reduce((acc, event) => {
     console.log(event, "event");
@@ -65,9 +66,13 @@ const Calendar = ({ eventsData }) => {
       <BigCalendar
         localizer={localizer}
         events={events}
-        eventThumbnail={({ event }) => <dev></dev>}
+        onView={(v) => setView(v)}
+        components={{
+          event: (props) => <EventThumbnail {...props} view={view} />,
+        }}
         startAccessor="start"
         endAccessor="end"
+        defaultView={view}
         style={{ height: "100%" }} // Ensure it uses the full height
         onSelectEvent={handleSelectEvent} // Open popup on event click
       />
