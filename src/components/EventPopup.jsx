@@ -1,14 +1,19 @@
 import React from "react";
 import "./EventsPopup.css"; // Import the CSS file for styles
 
-const EventsPopup = ({ event, onClose }) => {
+const EventsPopup = ({ event, onClose, onClick }) => {
   if (!event) return null;
 
   const { summary, desc, start, end, score, link, user_det, job_id } = event;
   const { candidate, handled_by } = user_det;
-
+  const jobRole = job_id?.jobRequest_Title;
+  const hrName = user_det?.handled_by?.firstName;
+  const timeString = `${new Date(start).toLocaleTimeString()} - ${new Date(
+    end
+  ).toLocaleTimeString()}`;
+  const dateString = `${new Date(start).toLocaleDateString()}`
   return (
-    <div className="event-popup-overlay" onClick={onClose}>
+    <div className="event-popup-overlay">
       {" "}
       {/* Backdrop */}
       <div className="event-popup-content">
@@ -16,55 +21,37 @@ const EventsPopup = ({ event, onClose }) => {
           <span>Meetings</span>
           <button onClick={onClose}>X</button>
         </div>{" "}
+        <hr />
         {/* Modal Content */}
+        <div className="event-popup-content-details" onClick={()=>onClick(event)}>
         <h2>{summary}</h2>
-        <p>
-          <strong>Description:</strong> {desc}
-        </p>
-        <p>
-          <strong>Start Time:</strong> {new Date(start).toLocaleString()}
-        </p>
-        <p>
-          <strong>End Time:</strong> {new Date(end).toLocaleString()}
-        </p>
-        <p>
-          <strong>Score:</strong> {Object.values(score).join(", ")}
-        </p>
-        <p>
+        <p className="job">{jobRole}</p>
+        <p>Interviewer: {hrName}</p>
+        <p>Date: {dateString} | Time{timeString}</p>
+        </div>
+        <hr />
+        {/* <p>
           <strong>Event Link:</strong>{" "}
           <a href={link} target="_blank" rel="noopener noreferrer">
             {link}
           </a>
-        </p>
+        </p> */}
         {/* Candidate Details */}
-        <h3>Candidate Details</h3>
-        <p>
-          <strong>Name:</strong>{" "}
-          {`${candidate.candidate_firstName} ${candidate.candidate_lastName}`}
-        </p>
-        <p>
-          <strong>Email:</strong> {candidate.candidate_email}
-        </p>
+
         {event?.children &&
           event?.children.length > 0 &&
           event?.children.map((childEvent) => {
+            const { summary, desc, start, end, score, link, user_det, job_id } =
+              childEvent;
+            const jobRole = job_id?.jobRequest_Title;
+            const hrName = user_det?.handled_by?.firstName;
+            const timeString = `${new Date(start).toLocaleTimeString()} - ${new Date(end).toLocaleTimeString()}`;
+            const dateString = `${new Date(start).toLocaleDateString()}`
             return (
-              <div>
-                <p>
-                  <strong>Event Name:</strong> {childEvent?.title}
-                </p>
-                <p>
-                  <strong>Start Time:</strong>{" "}
-                  {new Date(childEvent?.start).toLocaleString()}
-                </p>
-                <p>
-                  <strong>End Time:</strong>{" "}
-                  {new Date(childEvent?.end).toLocaleString()}
-                </p>
-                <p>
-                  <strong>Score:</strong>{" "}
-                  {Object.values(childEvent?.score).join(", ")}
-                </p>
+              <div className="event-popup-content-details"  onClick={()=>onClick(childEvent)}>
+                <p className="job">{jobRole}</p>
+                <p>Interviewer: {hrName}</p>
+                <p>Date: {dateString} | Time{timeString}</p>
               </div>
             );
           })}

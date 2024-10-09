@@ -1,5 +1,5 @@
 import React from "react";
-import Calendar from "./components/Calendar";
+import Calendar from "./components/Calendar"; 
 import eventsData from "./data/calendarfromtoenddate.json"; //  path to the provided JSON data
 
 function App() {

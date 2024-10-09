@@ -5,27 +5,21 @@ import EventsPopup from "./EventPopup"; // Update if necessary
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css"; // Import your CSS file
 import EventThumbnail from "./EventThumbnail";
+import DetailsPopup from "./DetailsPopup";
 
 // Initialize localizer
 const localizer = momentLocalizer(moment);
 
 const Calendar = ({ eventsData }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedDetails, setSelectedDetails] = useState(null);
   const [view, setView] = useState("month");
   // Mapping the JSON event data to the format required by the calendar
   const events = eventsData?.reduce((acc, event) => {
-    console.log(event, "event");
-    const existingEvent = acc.find((e) => {
-      return (
-        new Date(event.start).toISOString() === new Date(e.start).toISOString()
-      );
-    });
-    console.log(existingEvent, "existing event");
-    if (
-      existingEvent &&
-      new Date(existingEvent.start).toISOString() ===
-        new Date(event.start).toISOString()
-    ) {
+    const existingEvent = acc.find((e) =>{
+      return  new Date(event.start).toISOString() === new Date(e.start).toISOString()});
+    if (existingEvent && new Date(existingEvent.start).toISOString() === new Date(event.start).toISOString()) {
+
       // If the start and end dates are same, create a nested event
       existingEvent.children = existingEvent.children || [];
       existingEvent.children.push({
@@ -55,8 +49,6 @@ const Calendar = ({ eventsData }) => {
     }
     return acc;
   }, []);
-
-  console.log(events.length, "test event", events);
   // Function to handle event selection and open the popup
   const handleSelectEvent = (event) => {
     setSelectedEvent(event);
@@ -66,7 +58,7 @@ const Calendar = ({ eventsData }) => {
       <BigCalendar
         localizer={localizer}
         events={events}
-        onView={(v) => setView(v)}
+        onView = {(v) => setView(v)}
         components={{
           event: (props) => <EventThumbnail {...props} view={view} />,
         }}
@@ -80,6 +72,13 @@ const Calendar = ({ eventsData }) => {
         <EventsPopup
           event={selectedEvent}
           onClose={() => setSelectedEvent(null)}
+          onClick = {(event)=>setSelectedDetails(event)}
+        />
+      )}
+      {selectedDetails && (
+        <DetailsPopup
+          event={selectedEvent}
+          onClose={() => setSelectedDetails(null)}
         />
       )}
     </div>
