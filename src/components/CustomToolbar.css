@@ -1,0 +1,71 @@
+.rbc-custom-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .rbc-custom-toolbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   .rbc-custom-toolbar-select{
+    display: flex;
+    gap: 10px; 
+    select {
+      border: 1px solid gainsboro;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #fff;
+      color: black;
+    }
+   }
+
+
+
+  }
+
+  .rbc-custom-toolbar-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .rbc-btn-navigation-group {
+      display: flex;
+      gap: 5px;
+      button {
+        background-color: white;
+        color: black;
+        padding: "6px";
+        borderradius: "5px";
+        border: 1px solid gainsboro;
+      }
+    }
+
+    .rbc-btn-custom-group {
+        display: flex;
+        gap: 5px;
+        button {
+            background-color: white;
+            color: black !important;
+            border: 1px solid gainsboro;
+          }
+          button.active{
+           background-color: #e3f4ff !important;
+
+          }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .rbc-custom-toolbar-bottom {
+       flex-direction: column;
+       gap: 10px;
+       .rbc-btn-navigation-group {
+        width: 100%;
+        justify-content: flex-start;
+        align-items: flex-start;
+       }
+    }
+
+  }
+}

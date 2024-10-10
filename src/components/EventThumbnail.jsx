@@ -16,9 +16,7 @@ const EventThumbnail = ({ event, view }) => {
       <p>{jobRole}</p>
       <p>Interviewer{hrName}</p>
       <p>{timeString}</p>
-      {
-        view === "week" && <p>Week</p>
-      }
+      
     </div>
   );
 };

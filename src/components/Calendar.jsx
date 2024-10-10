@@ -6,6 +6,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css"; // Import your CSS file
 import EventThumbnail from "./EventThumbnail";
 import DetailsPopup from "./DetailsPopup";
+import CustomToolbar from "./CustomToolbar";
 
 // Initialize localizer
 const localizer = momentLocalizer(moment);
@@ -59,8 +60,11 @@ const Calendar = ({ eventsData }) => {
         localizer={localizer}
         events={events}
         onView = {(v) => setView(v)}
+        popupOffset={20}
+        popup={(props) => <EventsPopup {...props} />}
         components={{
           event: (props) => <EventThumbnail {...props} view={view} />,
+          toolbar: CustomToolbar, 
         }}
         startAccessor="start"
         endAccessor="end"

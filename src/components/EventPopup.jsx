@@ -14,22 +14,28 @@ const EventsPopup = ({ event, onClose, onClick }) => {
   const dateString = `${new Date(start).toLocaleDateString()}`
   return (
     <div className="event-popup-overlay">
-      {" "}
+      {" "}<div className="event-popup-container-overlay"onClick={onClose} />
       {/* Backdrop */}
-      <div className="event-popup-content">
+      <div className="event-popup-content main">
+        <div className="event-popup-container-overlay"onClick={onClose} />
         <div className="event-popup-content-title">
           <span>Meetings</span>
           <button onClick={onClose}>X</button>
         </div>{" "}
-        <hr />
+        
         {/* Modal Content */}
-        <div className="event-popup-content-details" onClick={()=>onClick(event)}>
-        <h2>{summary}</h2>
-        <p className="job">{jobRole}</p>
-        <p>Interviewer: {hrName}</p>
-        <p>Date: {dateString} | Time{timeString}</p>
+        <div
+          className="event-popup-content-details"
+          onClick={() => onClick(event)}
+        >
+          <h2>{summary}</h2>
+          <p className="job">{jobRole}</p>
+          <p>Interviewer: {hrName}</p>
+          <p>
+            Date: {dateString} | Time{timeString}
+          </p>
         </div>
-        <hr />
+        
         {/* <p>
           <strong>Event Link:</strong>{" "}
           <a href={link} target="_blank" rel="noopener noreferrer">
@@ -37,7 +43,6 @@ const EventsPopup = ({ event, onClose, onClick }) => {
           </a>
         </p> */}
         {/* Candidate Details */}
-
         {event?.children &&
           event?.children.length > 0 &&
           event?.children.map((childEvent) => {
@@ -45,13 +50,20 @@ const EventsPopup = ({ event, onClose, onClick }) => {
               childEvent;
             const jobRole = job_id?.jobRequest_Title;
             const hrName = user_det?.handled_by?.firstName;
-            const timeString = `${new Date(start).toLocaleTimeString()} - ${new Date(end).toLocaleTimeString()}`;
-            const dateString = `${new Date(start).toLocaleDateString()}`
+            const timeString = `${new Date(
+              start
+            ).toLocaleTimeString()} - ${new Date(end).toLocaleTimeString()}`;
+            const dateString = `${new Date(start).toLocaleDateString()}`;
             return (
-              <div className="event-popup-content-details"  onClick={()=>onClick(childEvent)}>
+              <div
+                className="event-popup-content-details"
+                onClick={() => onClick(childEvent)}
+              >
                 <p className="job">{jobRole}</p>
                 <p>Interviewer: {hrName}</p>
-                <p>Date: {dateString} | Time{timeString}</p>
+                <p>
+                  Date: {dateString} | Time{timeString}
+                </p>
               </div>
             );
           })}
