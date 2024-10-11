@@ -115,18 +115,6 @@ const CustomToolbar = ({ date, onNavigate, view, onView, label }) => {
           >
             Day
           </button>
-          <button
-            type="button"
-            onClick={() => onView("agenda")}
-            className={view === "agenda" ? "active" : ""}
-            style={{
-              padding: "10px",
-              backgroundColor: view === "agenda" ? "#3498db" : "",
-              color: "white",
-            }}
-          >
-            Agenda
-          </button>
         </div>
       </div>
     </div>
