@@ -29,6 +29,9 @@
   margin: 2px;
   cursor: pointer;
   overflow: visible;
+  .rbc-event-label{
+    display: none;
+  }
 }
 
 .rbc-event:hover {
@@ -38,9 +41,16 @@
 .rbc-event.rbc-selected{
   background-color: #fff;
   color: #000;
+  overflow: visible;
+}
+.rbc-day-slot .rbc-event{
+  border-left: 7px solid #1a73e8;
 }
 
 .calendar-container .rbc-btn-group{
   white-space: pre-wrap !important;
 }
 
+.rbc-timeslot-group{
+  min-height: 70px !important; 
+}

@@ -17,10 +17,16 @@ const Calendar = ({ eventsData }) => {
   const [view, setView] = useState("month");
   // Mapping the JSON event data to the format required by the calendar
   const events = eventsData?.reduce((acc, event) => {
-    const existingEvent = acc.find((e) =>{
-      return  new Date(event.start).toISOString() === new Date(e.start).toISOString()});
-    if (existingEvent && new Date(existingEvent.start).toISOString() === new Date(event.start).toISOString()) {
-
+    const existingEvent = acc.find((e) => {
+      return (
+        new Date(event.start).toISOString() === new Date(e.start).toISOString()
+      );
+    });
+    if (
+      existingEvent &&
+      new Date(existingEvent.start).toISOString() ===
+        new Date(event.start).toISOString()
+    ) {
       // If the start and end dates are same, create a nested event
       existingEvent.children = existingEvent.children || [];
       existingEvent.children.push({
@@ -59,16 +65,15 @@ const Calendar = ({ eventsData }) => {
       <BigCalendar
         localizer={localizer}
         events={events}
-        onView = {(v) => setView(v)}
-        popupOffset={20}
-        popup={(props) => <EventsPopup {...props} />}
+        onView={(v) => setView(v)}
         components={{
           event: (props) => <EventThumbnail {...props} view={view} />,
-          toolbar: CustomToolbar, 
+          eventWrapper: (props) => <div className="custom-event-wrapper">{props?.children}</div>,
+          toolbar: CustomToolbar,
         }}
         startAccessor="start"
         endAccessor="end"
-        defaultView={view}
+        // defaultView={view}
         style={{ height: "100%" }} // Ensure it uses the full height
         onSelectEvent={handleSelectEvent} // Open popup on event click
       />
@@ -76,7 +81,7 @@ const Calendar = ({ eventsData }) => {
         <EventsPopup
           event={selectedEvent}
           onClose={() => setSelectedEvent(null)}
-          onClick = {(event)=>setSelectedDetails(event)}
+          onClick={(event) => setSelectedDetails(event)}
         />
       )}
       {selectedDetails && (

@@ -9,7 +9,7 @@ const EventThumbnail = ({ event, view }) => {
       ? event?.children?.length + 1
       : 0;
   return (
-    <div className={`event-thumbnail-container ${view === "day"&& "day"}`}>
+    <div className={`event-thumbnail-container`}>
       {multiEvent > 0 && (
         <span className="event-thumbnail-count">{multiEvent}</span>
       )}

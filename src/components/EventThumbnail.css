@@ -18,6 +18,9 @@
     margin-top: 5px;
     gap: 10px;
 }
+.event-thumbnail-container.week{
+background-color: #facc15;
+}
 
 .rbc-event-content{
     overflow: visible!important;
