@@ -23,6 +23,7 @@ background-color: #facc15;
 }
 
 .rbc-event-content{
+    white-space: pre-wrap;
     overflow: visible!important;
 }
 

@@ -68,7 +68,7 @@ const Calendar = ({ eventsData }) => {
         onView={(v) => setView(v)}
         components={{
           event: (props) => <EventThumbnail {...props} view={view} />,
-          eventWrapper: (props) => <div className="custom-event-wrapper">{props?.children}</div>,
+          // eventWrapper: (props) => <div className="custom-event-wrapper">{props?.children}</div>,
           toolbar: CustomToolbar,
         }}
         startAccessor="start"

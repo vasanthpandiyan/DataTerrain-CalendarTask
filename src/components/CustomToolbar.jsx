@@ -115,6 +115,7 @@ const CustomToolbar = ({ date, onNavigate, view, onView, label }) => {
           >
             Day
           </button>
+          
         </div>
       </div>
     </div>

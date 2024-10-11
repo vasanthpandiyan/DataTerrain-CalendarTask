@@ -29,9 +29,20 @@
   margin: 2px;
   cursor: pointer;
   overflow: visible;
+  position: relative;
+  /* height: max-content !important; */
+  z-index: 100;
   .rbc-event-label{
     display: none;
   }
+}
+/* .rbc-row {
+  display: block !important;
+} */
+
+
+.rbc-month-row {
+  overflow: visible !important;
 }
 
 .rbc-event:hover {
@@ -45,6 +56,7 @@
 }
 .rbc-day-slot .rbc-event{
   border-left: 7px solid #1a73e8;
+  overflow: visible;
 }
 
 .calendar-container .rbc-btn-group{
